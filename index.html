@@ -3,114 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="RockFlow — твой гид в мир скалолазания. История, техника, снаряжение, тренировки и советы новичкам от профессионалов.">
+    <meta name="description" content="RockFlow — профессиональный портал о скалолазании. История, виды, техника, снаряжение, тренировки, безопасность и советы от экспертов.">
     <meta name="theme-color" content="#0f0f0f">
-    <title>RockFlow | Скалолазание для каждого</title>
+    <title>RockFlow | Скалолазание — гид от новичка до профи</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Montserrat:wght@700..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Montserrat:wght@700..900&family=Space+Grotesk:wght@500..700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #f5f5f7;
             --surface: #ffffff;
             --surface-hover: #e8e8ed;
+            --surface-alt: #f0f0f2;
             --text: #1d1d1f;
             --text-secondary: #6e6e73;
             --accent: #ff5e3a;
             --accent-glow: #ff3b10;
+            --accent-soft: rgba(255,94,58,0.1);
             --border: rgba(0, 0, 0, 0.08);
+            --border-light: rgba(0, 0, 0, 0.04);
             --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
             --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.12);
             --gradient-hero: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
             --nav-blur: rgba(245, 245, 247, 0.72);
             --card-tag-bg: rgba(0, 0, 0, 0.04);
-            --card-tag-text: #1d1d1f;
-            --gallery-overlay: rgba(0, 0, 0, 0.15);
-            --modal-bg: rgba(0, 0, 0, 0.92);
+            --modal-bg: rgba(0, 0, 0, 0.95);
+            --success: #34c759;
+            --warning: #ff9500;
         }
 
         [data-theme="light"] {
             --bg: #f5f5f7;
             --surface: #ffffff;
             --surface-hover: #e8e8ed;
+            --surface-alt: #f0f0f2;
             --text: #1d1d1f;
             --text-secondary: #6e6e73;
+            --accent-soft: rgba(255,94,58,0.08);
             --border: rgba(0, 0, 0, 0.08);
+            --border-light: rgba(0, 0, 0, 0.04);
             --nav-blur: rgba(245, 245, 247, 0.72);
             --card-tag-bg: rgba(0, 0, 0, 0.04);
-            --card-tag-text: #1d1d1f;
-            --gallery-overlay: rgba(0, 0, 0, 0.15);
             --modal-bg: rgba(0, 0, 0, 0.92);
         }
 
         [data-theme="dark"] {
-            --bg: #0f0f0f;
+            --bg: #0a0a0b;
             --surface: #1c1c1e;
             --surface-hover: #2c2c2e;
+            --surface-alt: #161618;
             --text: #f5f5f7;
-            --text-secondary: #a1a1a6;
+            --text-secondary: #98989e;
+            --accent-soft: rgba(255,94,58,0.1);
             --border: rgba(255, 255, 255, 0.1);
-            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.4);
-            --nav-blur: rgba(15, 15, 15, 0.72);
-            --card-tag-bg: rgba(255, 255, 255, 0.08);
-            --card-tag-text: #f5f5f7;
-            --gallery-overlay: rgba(0, 0, 0, 0.35);
-            --modal-bg: rgba(0, 0, 0, 0.95);
+            --border-light: rgba(255, 255, 255, 0.05);
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.5);
+            --nav-blur: rgba(10, 10, 11, 0.78);
+            --card-tag-bg: rgba(255, 255, 255, 0.06);
+            --modal-bg: rgba(0, 0, 0, 0.97);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html {
             scroll-behavior: smooth;
             font-size: 16px;
+            scroll-padding-top: 80px;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background-color: var(--bg);
             color: var(--text);
-            line-height: 1.6;
+            line-height: 1.7;
             overflow-x: hidden;
             transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 28px;
         }
 
         h1, h2, h3, h4 {
             font-family: 'Montserrat', 'Inter', sans-serif;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
 
         h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            line-height: 1.15;
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.2rem, 5vw, 3.4rem);
+            line-height: 1.12;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.6rem;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 3.5rem;
+            margin-bottom: 4rem;
         }
 
         .section-header .subtitle {
             color: var(--accent);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-size: 0.8rem;
-            margin-bottom: 0.6rem;
+            letter-spacing: 0.18em;
+            font-size: 0.78rem;
+            margin-bottom: 0.7rem;
             font-family: 'Inter', sans-serif;
+        }
+
+        .section-header .description {
+            max-width: 600px;
+            margin: 1rem auto 0;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
         }
 
         /* Навигация */
@@ -119,13 +134,18 @@
             top: 0;
             left: 0;
             right: 0;
-            z-index: 100;
-            padding: 1rem 0;
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
+            z-index: 1000;
+            padding: 0.9rem 0;
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
             background: var(--nav-blur);
             border-bottom: 1px solid var(--border);
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
+        }
+
+        .nav.scrolled {
+            padding: 0.55rem 0;
+            box-shadow: var(--shadow-md);
         }
 
         .nav .container {
@@ -135,12 +155,19 @@
         }
 
         .nav-logo {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            font-size: 1.6rem;
-            letter-spacing: -0.03em;
+            font-family: 'Space Grotesk', 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.65rem;
+            letter-spacing: -0.04em;
             color: var(--text);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-logo .logo-icon {
+            font-size: 1.8rem;
         }
 
         .nav-logo span {
@@ -149,18 +176,21 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.6rem;
             list-style: none;
             align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
         }
 
         .nav-links a {
             color: var(--text);
             text-decoration: none;
             font-weight: 500;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             transition: color 0.2s;
             position: relative;
+            white-space: nowrap;
         }
 
         .nav-links a:hover {
@@ -171,21 +201,21 @@
             background: var(--surface);
             border: 1px solid var(--border);
             color: var(--text);
-            width: 40px;
-            height: 40px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             transition: all 0.3s;
-            margin-left: 1rem;
+            flex-shrink: 0;
         }
 
         .theme-toggle:hover {
             background: var(--surface-hover);
-            transform: rotate(20deg);
+            transform: rotate(25deg);
         }
 
         .burger {
@@ -195,14 +225,16 @@
             cursor: pointer;
             background: none;
             border: none;
-            padding: 4px;
+            padding: 6px;
+            z-index: 1001;
         }
 
         .burger span {
             display: block;
-            width: 24px;
-            height: 2px;
+            width: 26px;
+            height: 2.5px;
             background: var(--text);
+            border-radius: 3px;
             transition: 0.3s;
         }
 
@@ -214,14 +246,29 @@
             background: var(--gradient-hero);
             position: relative;
             overflow: hidden;
-            margin-top: 0;
+            padding-top: 70px;
         }
 
-        .hero-bg {
+        .hero-particles {
             position: absolute;
             inset: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M0 800 L1200 500 L1200 800 Z" fill="%23ff5e3a20"/><circle cx="900" cy="200" r="300" fill="%23ffffff05"/></svg>') no-repeat center/cover;
-            opacity: 0.5;
+            overflow: hidden;
+        }
+
+        .hero-particles span {
+            position: absolute;
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            animation: rise 14s infinite;
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
         }
 
         .hero .container {
@@ -229,129 +276,291 @@
             z-index: 2;
             display: flex;
             align-items: center;
-            gap: 3rem;
+            gap: 4rem;
             flex-wrap: wrap;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
         }
 
         .hero-content {
-            flex: 1 1 500px;
+            flex: 1 1 520px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.45rem 1.2rem;
+            border-radius: 50px;
+            color: #ff9a76;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.8rem;
+            letter-spacing: 0.04em;
         }
 
         .hero-content h1 {
-            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-size: clamp(3.4rem, 8vw, 6rem);
             font-weight: 900;
             color: #ffffff;
-            line-height: 1;
-            margin-bottom: 1.2rem;
-            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+            line-height: 0.98;
+            margin-bottom: 1.3rem;
+            text-shadow: 0 4px 40px rgba(0,0,0,0.5);
         }
 
         .hero-content .accent-text {
-            background: linear-gradient(to right, #ff5e3a, #ff9a76);
+            background: linear-gradient(135deg, #ff5e3a 0%, #ff9a76 60%, #ffc3a0 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
         .hero-content p {
-            font-size: 1.15rem;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 2.5rem;
-            max-width: 500px;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.78);
+            margin-bottom: 2.8rem;
+            max-width: 520px;
+            line-height: 1.6;
         }
 
-        .hero-visual {
-            flex: 1 1 400px;
+        .hero-buttons {
             display: flex;
-            justify-content: center;
-        }
-
-        .hero-card {
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 32px;
-            padding: 2.5rem;
-            text-align: center;
-            color: white;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .hero-card .stat {
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #ff9a76;
-        }
-
-        @keyframes float {
-            0%,100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .btn {
             display: inline-block;
             background: var(--accent);
             color: white;
-            padding: 1rem 2.2rem;
+            padding: 1rem 2.5rem;
             border-radius: 50px;
             font-weight: 700;
             text-decoration: none;
             letter-spacing: 0.02em;
-            transition: all 0.3s;
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 24px rgba(255,94,58,0.35);
+            box-shadow: 0 10px 28px rgba(255,94,58,0.38);
+            font-size: 1.05rem;
         }
 
         .btn:hover {
             background: var(--accent-glow);
-            transform: translateY(-3px);
-            box-shadow: 0 14px 32px rgba(255,94,58,0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 40px rgba(255,94,58,0.55);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.5);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.08);
+            border-color: white;
+            box-shadow: 0 10px 28px rgba(255,255,255,0.15);
+        }
+
+        .hero-visual {
+            flex: 1 1 420px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-stat {
+            text-align: center;
+            color: white;
+        }
+
+        .hero-stat .number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ff9a76;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .hero-stat .label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
         /* Секции */
         section {
-            padding: 5rem 0;
+            padding: 6rem 0;
+            position: relative;
         }
 
-        /* Карточки видов скалолазания */
-        .types-grid {
+        section:nth-child(even) {
+            background: var(--surface-alt);
+        }
+
+        /* История - таймлайн */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 18px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding: 1.5rem 2rem;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 28px;
+            width: 14px;
+            height: 14px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg);
+            box-shadow: 0 0 0 3px var(--accent);
+        }
+
+        .timeline-year {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* Карточки */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.8rem;
         }
 
-        .type-card {
+        .card {
             background: var(--surface);
             border-radius: 24px;
-            padding: 2rem;
+            padding: 2.2rem;
             border: 1px solid var(--border);
-            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
-            cursor: default;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .type-card:hover {
-            transform: translateY(-8px);
+        .card:hover {
+            transform: translateY(-10px);
             box-shadow: var(--shadow-lg);
             border-color: var(--accent);
         }
 
-        .type-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .card .icon {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            display: block;
         }
 
-        .type-card h3 {
-            margin-bottom: 0.5rem;
+        .card .tag {
+            display: inline-block;
+            background: var(--card-tag-bg);
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.03em;
+        }
+
+        /* Аккордеон */
+        .accordion {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            margin-bottom: 0.9rem;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .accordion-item.active {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .accordion-header {
+            padding: 1.4rem 2rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.25s;
+            font-size: 1.08rem;
+        }
+
+        .accordion-header:hover {
+            background: var(--surface-hover);
+        }
+
+        .accordion-body {
+            padding: 0 2rem 1.6rem;
+            color: var(--text-secondary);
+            display: none;
+            line-height: 1.8;
+        }
+
+        .accordion-item.active .accordion-body {
+            display: block;
+        }
+
+        .accordion-icon {
+            transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
         }
 
         /* Галерея */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
+            gap: 1.2rem;
         }
 
         .gallery-item {
@@ -361,22 +570,41 @@
             position: relative;
             aspect-ratio: 4/3;
             background: var(--surface);
-            transition: transform 0.3s;
+            transition: transform 0.4s, box-shadow 0.4s;
         }
 
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: transform 0.6s;
         }
 
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.06);
         }
 
         .gallery-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-caption {
+            opacity: 1;
         }
 
         .lightbox {
@@ -386,8 +614,9 @@
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 1000;
+            z-index: 9999;
             cursor: pointer;
+            backdrop-filter: blur(8px);
         }
 
         .lightbox.active {
@@ -395,106 +624,145 @@
         }
 
         .lightbox img {
-            max-width: 90vw;
-            max-height: 90vh;
+            max-width: 92vw;
+            max-height: 92vh;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            animation: zoomIn 0.35s ease;
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Таблица сложности */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 1.5rem 0;
             border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-
-        /* Аккордеон для техники / советов */
-        .accordion {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .accordion-item {
-            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 18px;
-            margin-bottom: 1rem;
-            overflow: hidden;
         }
 
-        .accordion-header {
-            padding: 1.3rem 1.8rem;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--surface);
+        }
+
+        th, td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: var(--surface-hover);
             font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.2s;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
         }
 
-        .accordion-header:hover {
+        tr:hover td {
             background: var(--surface-hover);
         }
 
-        .accordion-body {
-            padding: 0 1.8rem 1.5rem;
-            color: var(--text-secondary);
-            display: none;
-        }
-
-        .accordion-item.active .accordion-body {
-            display: block;
-        }
-
-        .accordion-icon {
-            transition: transform 0.3s;
-            font-size: 1.2rem;
-            color: var(--accent);
-        }
-
-        .accordion-item.active .accordion-icon {
-            transform: rotate(45deg);
-        }
-
-        /* Снаряжение - карточки */
-        .gear-grid {
+        /* Советы - сетка */
+        .tips-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
-        .gear-card {
+        .tip-card {
             background: var(--surface);
             border-radius: 20px;
-            padding: 2rem 1.5rem;
-            text-align: center;
+            padding: 2rem;
             border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
             transition: all 0.3s;
         }
 
-        .gear-card:hover {
-            border-color: var(--accent);
+        .tip-card:hover {
             box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .tip-card .tip-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            opacity: 0.4;
+            line-height: 1;
         }
 
         /* Футер */
         .footer {
-            background: #0a0a0a;
-            color: #aaa;
-            padding: 3rem 0;
-            border-top: 1px solid rgba(255,255,255,0.08);
+            background: #050508;
+            color: #999;
+            padding: 5rem 0 2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer h4 {
+            color: #ddd;
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
         }
 
         .footer a {
-            color: #ccc;
+            color: #888;
             text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
             transition: color 0.2s;
+            font-size: 0.9rem;
         }
 
         .footer a:hover {
             color: var(--accent);
         }
 
-        @media (max-width: 768px) {
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.85rem;
+        }
+
+        /* Чеклист */
+        .checklist {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .checklist li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .checklist li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
             .nav-links {
                 display: none;
                 position: absolute;
@@ -502,10 +770,12 @@
                 left: 0;
                 right: 0;
                 background: var(--nav-blur);
-                backdrop-filter: blur(24px);
+                backdrop-filter: blur(28px);
                 flex-direction: column;
-                padding: 1.5rem;
+                padding: 1.8rem;
                 border-bottom: 1px solid var(--border);
+                gap: 1rem;
+                align-items: flex-start;
             }
             .nav-links.active {
                 display: flex;
@@ -514,15 +784,32 @@
                 display: flex;
             }
             .hero-content h1 {
-                font-size: 3rem;
+                font-size: 2.8rem;
+            }
+            .hero-stats {
+                gap: 1.5rem;
+            }
+            .hero-stat .number {
+                font-size: 2.5rem;
+            }
+            .timeline {
+                padding-left: 28px;
+            }
+            .timeline-item::before {
+                left: -22px;
+            }
+            section {
+                padding: 4rem 0;
             }
         }
     </style>
 </head>
 <body>
-    <nav class="nav">
+    <nav class="nav" id="navbar">
         <div class="container">
-            <a href="#" class="nav-logo">Rock<span>Flow</span></a>
+            <a href="#" class="nav-logo">
+                <span class="logo-icon">⛰️</span> Rock<span>Flow</span>
+            </a>
             <button class="burger" id="burger" aria-label="Меню">
                 <span></span><span></span><span></span>
             </button>
@@ -535,190 +822,141 @@
                 <li><a href="#training">Тренировки</a></li>
                 <li><a href="#tips">Советы</a></li>
                 <li><a href="#gallery">Галерея</a></li>
+                <li><a href="#grades">Сложность</a></li>
                 <li><button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">☀️</button></li>
             </ul>
         </div>
     </nav>
 
     <header class="hero" id="main">
-        <div class="hero-bg"></div>
+        <div class="hero-particles">
+            <span style="left:10%;animation-delay:0s;"></span>
+            <span style="left:25%;animation-delay:2s;"></span>
+            <span style="left:45%;animation-delay:4s;"></span>
+            <span style="left:65%;animation-delay:1s;"></span>
+            <span style="left:80%;animation-delay:5s;"></span>
+            <span style="left:90%;animation-delay:3s;"></span>
+        </div>
         <div class="container">
             <div class="hero-content">
-                <h1>Достигни <span class="accent-text">вершины</span></h1>
-                <p>Профессиональный портал о скалолазании: от истории до сложнейших техник. Твой путь начинается здесь.</p>
-                <a href="#types" class="btn">Исследовать</a>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="stat">12k+</div>
-                    <div>скалолазов с нами</div>
+                <div class="hero-badge">🏆 Олимпийский вид спорта</div>
+                <h1>Покоряй <span class="accent-text">вершины</span> вместе с нами</h1>
+                <p>Полный гид по скалолазанию: от первых шагов на скалодроме до профессиональных техник. История, снаряжение, тренировки и советы экспертов.</p>
+                <div class="hero-buttons">
+                    <a href="#types" class="btn">Начать путь</a>
+                    <a href="#tips" class="btn btn-outline">Советы новичкам</a>
+                </div>
+                <div class="hero-stats" style="margin-top: 3rem;">
+                    <div class="hero-stat"><div class="number">150+</div><div class="label">Скалодромов РФ</div></div>
+                    <div class="hero-stat"><div class="number">50k+</div><div class="label">Скалолазов</div></div>
+                    <div class="hero-stat"><div class="number">3</div><div class="label">Олимп. дисциплины</div></div>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- История -->
     <section id="history">
         <div class="container">
             <div class="section-header">
-                <p class="subtitle">Корни спорта</p>
+                <p class="subtitle">От альпинизма до Олимпиады</p>
                 <h2>История скалолазания</h2>
+                <p class="description">Путь длиной в полтора века — от тренировок альпинистов до мирового спортивного движения.</p>
             </div>
-            <div style="max-width:750px;margin:0 auto;text-align:center;color:var(--text-secondary);">
-                <p>Скалолазание выросло из альпинизма в конце XIX века. Сначала это был способ тренировок перед горными восхождениями в Альпах, а затем превратилось в самостоятельную дисциплину. В 1980-х годах появились первые крытые скалодромы, сделавшие спорт доступным миллионам. Сегодня это олимпийский вид, объединяющий силу, гибкость и стратегическое мышление.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-year">1870-е</div>
+                    <h3>Зарождение</h3>
+                    <p>Альпинисты в Доломитовых Альпах начинают практиковать лазание по скалам как тренировку перед восхождениями. Первые упоминания о целенаправленном скалолазании.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1930-е</div>
+                    <h3>Первые соревнования</h3>
+                    <p>В СССР и Европе проводятся первые неофициальные состязания. Скалолазание признаётся как самостоятельная дисциплина.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">1980-е</div>
+                    <h3>Эра скалодромов</h3>
+                    <p>Появляются первые искусственные скалодромы. Спорт становится доступным круглый год, растёт массовость.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-year">2020</div>
+                    <h3>Олимпийский дебют</h3>
+                    <p>Скалолазание дебютирует на Олимпийских играх в Токио. С 2024 года — с отдельными медалями за скорость и двоеборье.</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Виды скалолазания -->
     <section id="types">
         <div class="container">
             <div class="section-header">
                 <p class="subtitle">Дисциплины</p>
                 <h2>Виды скалолазания</h2>
+                <p class="description">Каждая дисциплина требует уникального набора навыков. Выбери свою.</p>
             </div>
-            <div class="types-grid">
-                <div class="type-card"><div class="icon">🧗</div><h3>Боулдеринг</h3><p>Короткие сложные трассы без страховки, высота до 4-5 метров. Чистая мощь и техника.</p></div>
-                <div class="type-card"><div class="icon">🪢</div><h3>Трудность</h3><p>Длинные маршруты с верёвкой. Выносливость и умение читать рельеф.</p></div>
-                <div class="type-card"><div class="icon">⏱️</div><h3>Скорость</h3><p>Парные забеги на эталонной 15-метровой стене. Взрывная динамика.</p></div>
-                <div class="type-card"><div class="icon">🏔️</div><h3>Традиционное</h3><p>Лазание на естественном рельефе с установкой своих точек страховки.</p></div>
+            <div class="cards-grid">
+                <div class="card">
+                    <span class="icon">🧗‍♂️</span>
+                    <span class="tag">Сила и техника</span>
+                    <h3>Боулдеринг</h3>
+                    <p>Короткие предельно сложные трассы высотой до 4,5 м. Лазание без страховки над матами. Требует взрывной силы и креативного мышления.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">🪢</span>
+                    <span class="tag">Выносливость</span>
+                    <h3>Лазание на трудность</h3>
+                    <p>Длинные маршруты до 30+ метров с верёвкой. Побеждает тот, кто забрался выше всех. Ключевые качества — выносливость и тактика.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">⚡</span>
+                    <span class="tag">Скорость</span>
+                    <h3>Скоростное лазание</h3>
+                    <p>Парные забеги на эталонной 15-метровой стене. Мировой рекорд — около 5 секунд. Взрывная динамика и реакция.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">🏔️</span>
+                    <span class="tag">Природа</span>
+                    <h3>Традиционное лазание</h3>
+                    <p>Прохождение скальных маршрутов с установкой собственных точек страховки. Максимальная связь с природой и ответственность.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">🧊</span>
+                    <span class="tag">Экстрим</span>
+                    <h3>Ледолазание</h3>
+                    <p>Лазание по замёрзшим водопадам и ледовым стенам с использованием кошек и ледовых инструментов. Сезонный адреналин.</p>
+                </div>
+                <div class="card">
+                    <span class="icon">🏢</span>
+                    <span class="tag">Город</span>
+                    <h3>Скалодромы</h3>
+                    <p>Крытые залы с искусственными зацепами. Идеально для тренировок в любую погоду и знакомства со спортом.</p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- Техника -->
     <section id="technique">
         <div class="container">
-            <div class="section-header"><p class="subtitle">Мастерство</p><h2>Техника лазания</h2></div>
+            <div class="section-header">
+                <p class="subtitle">Мастерство</p>
+                <h2>Техника лазания</h2>
+                <p class="description">Освой базовые приёмы, которые превратят тебя в эффективного скалолаза.</p>
+            </div>
             <div class="accordion">
-                <div class="accordion-item"><div class="accordion-header">Постановка ног <span class="accordion-icon">+</span></div><div class="accordion-body">Ставь носок точно на зацепку, используй бока стопы. Тишина — признак точности.</div></div>
-                <div class="accordion-item"><div class="accordion-header">Работа корпуса <span class="accordion-icon">+</span></div><div class="accordion-body">Держи бёдра близко к стене, скручивайся для экономии сил рук.</div></div>
-                <div class="accordion-item"><div class="accordion-header">Динамика и статика <span class="accordion-icon">+</span></div><div class="accordion-body">Чередуй плавные контролируемые движения с мощными бросками к далёким зацепам.</div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="safety">
-        <div class="container">
-            <div class="section-header"><p class="subtitle">Важно</p><h2>Безопасность</h2></div>
-            <div style="max-width:700px;margin:0 auto;color:var(--text-secondary);text-align:center;">
-                <p>🔸 Всегда проверяй снаряжение и узлы.<br>🔸 Общайся с напарником: «Страховка готова», «Понял».<br>🔸 Приземляйся правильно в боулдеринге — на согнутые ноги с перекатом.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="gear">
-        <div class="container">
-            <div class="section-header"><p class="subtitle">Экипировка</p><h2>Снаряжение</h2></div>
-            <div class="gear-grid">
-                <div class="gear-card">🪨<h3>Скальники</h3><p>Специальная обувь с агрессивным загибом для точного трения.</p></div>
-                <div class="gear-card">🦺<h3>Страховочная система</h3><p>Беседка, соединяющая скалолаза с верёвкой.</p></div>
-                <div class="gear-card">🧤<h3>Магнезия</h3><p>Порошок или жидкая магнезия для сухости рук.</p></div>
-                <div class="gear-card">🔒<h3>Карабины</h3><p>Алюминиевые или стальные соединительные элементы.</p></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="training">
-        <div class="container">
-            <div class="section-header"><p class="subtitle">Прогресс</p><h2>Тренировки</h2></div>
-            <div style="max-width:650px;margin:0 auto;color:var(--text-secondary);">
-                <p>🔹 Разминка суставов и пальцев обязательна.<br>🔹 Планка и подтягивания — база силы.<br>🔹 Лазай объём и разнообразие трасс, а не только любимый стиль.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="tips">
-        <div class="container">
-            <div class="section-header"><p class="subtitle">Старт</p><h2>Советы новичкам</h2></div>
-            <div class="accordion">
-                <div class="accordion-item"><div class="accordion-header">Не смотри на категории <span class="accordion-icon">+</span></div><div class="accordion-body">Цифры сложности придут со временем. Сначала — удовольствие от движения.</div></div>
-                <div class="accordion-item"><div class="accordion-header">Расслабляй хват <span class="accordion-icon">+</span></div><div class="accordion-body">Сжимай зацепки ровно настолько, чтобы не упасть. Экономия сил.</div></div>
-                <div class="accordion-item"><div class="accordion-header">Смотри видео профессионалов <span class="accordion-icon">+</span></div><div class="accordion-body">IFSC-трансляции — лучшая школа чтения трасс.</div></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="gallery">
-        <div class="container">
-            <div class="section-header"><p class="subtitle">Моменты</p><h2>Галерея</h2></div>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=600&q=80" alt="Скалолаз" loading="lazy"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Боулдеринг" loading="lazy"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1606925797300-0b35e9d788cb?w=600&q=80" alt="Снаряжение" loading="lazy"></div>
-                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600&q=80" alt="Скорость" loading="lazy"></div>
-            </div>
-        </div>
-    </section>
-
-    <div class="lightbox" id="lightbox"><img src="" alt=""></div>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div><h4>RockFlow</h4><p>Гид в мир скалолазания.</p></div>
-                <div><h4>Контакты</h4><p>info@rockflow.ru<br>+7 999 123-45-67</p></div>
-                <div><h4>Соцсети</h4><a href="#">Telegram</a><br><a href="#">YouTube</a></div>
-            </div>
-            <p style="text-align:center;margin-top:2rem;font-size:0.85rem;">© 2026 RockFlow. Все права защищены.</p>
-        </div>
-    </footer>
-
-    <script>
-        (function() {
-            // Тема
-            const toggle = document.getElementById('themeToggle');
-            const html = document.documentElement;
-            const currentTheme = localStorage.getItem('theme') || 'dark';
-            html.setAttribute('data-theme', currentTheme);
-            toggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-
-            toggle.addEventListener('click', () => {
-                const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-                html.setAttribute('data-theme', next);
-                localStorage.setItem('theme', next);
-                toggle.textContent = next === 'dark' ? '☀️' : '🌙';
-            });
-
-            // Бургер
-            document.getElementById('burger').addEventListener('click', () => {
-                document.getElementById('navLinks').classList.toggle('active');
-            });
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active'));
-            });
-
-            // Аккордеон
-            document.querySelectorAll('.accordion-header').forEach(header => {
-                header.addEventListener('click', () => {
-                    header.parentElement.classList.toggle('active');
-                });
-            });
-
-            // Лайтбокс галереи
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = lightbox.querySelector('img');
-            document.querySelectorAll('.gallery-item img').forEach(img => {
-                img.addEventListener('click', (e) => {
-                    lightboxImg.src = e.target.src;
-                    lightbox.classList.add('active');
-                });
-            });
-            lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
-
-            // Плавное появление секций
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            document.querySelectorAll('section').forEach(sec => {
-                sec.style.opacity = 0;
-                sec.style.transform = 'translateY(20px)';
-                sec.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(sec);
-            });
-        })();
-    </script>
-</body>
-</html>
+                <div class="accordion-item active">
+                    <div class="accordion-header">Постановка ног — фундамент всего <span class="accordion-icon">+</span></div>
+                    <div class="accordion-body">
+                        <p>80% успеха в скалолазании — это работа ног. Ставь носок точно на зацепку, используй внутреннюю и внешнюю сторону стопы. «Тихие» ноги — признак точности. Не прыгай ногами по зацепам — каждое движение должно быть контролируемым.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">Положение корпуса и бёдер <span class="accordion-icon">+</span></div>
+                    <div class="accordion-body">
+                        <p>Держи бёдра как можно ближе к стене — это переносит вес на ноги и разгружает руки. Используй развороты корпуса (флаги, скручивания) чтобы дотягиваться до далёких зацепов без лишних затрат сил.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">Хваты: активный vs пассивный <span class="accordion
