@@ -1,205 +1,724 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="RockFlow — твой гид в мир скалолазания. История, техника, снаряжение, тренировки и советы новичкам от профессионалов.">
+    <meta name="theme-color" content="#0f0f0f">
+    <title>RockFlow | Скалолазание для каждого</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&family=Montserrat:wght@700..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f5f7;
+            --surface: #ffffff;
+            --surface-hover: #e8e8ed;
+            --text: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --accent: #ff5e3a;
+            --accent-glow: #ff3b10;
+            --border: rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.12);
+            --gradient-hero: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+            --nav-blur: rgba(245, 245, 247, 0.72);
+            --card-tag-bg: rgba(0, 0, 0, 0.04);
+            --card-tag-text: #1d1d1f;
+            --gallery-overlay: rgba(0, 0, 0, 0.15);
+            --modal-bg: rgba(0, 0, 0, 0.92);
+        }
 
+        [data-theme="light"] {
+            --bg: #f5f5f7;
+            --surface: #ffffff;
+            --surface-hover: #e8e8ed;
+            --text: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --border: rgba(0, 0, 0, 0.08);
+            --nav-blur: rgba(245, 245, 247, 0.72);
+            --card-tag-bg: rgba(0, 0, 0, 0.04);
+            --card-tag-text: #1d1d1f;
+            --gallery-overlay: rgba(0, 0, 0, 0.15);
+            --modal-bg: rgba(0, 0, 0, 0.92);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f0f0f;
+            --surface: #1c1c1e;
+            --surface-hover: #2c2c2e;
+            --text: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 24px 56px rgba(0, 0, 0, 0.4);
+            --nav-blur: rgba(15, 15, 15, 0.72);
+            --card-tag-bg: rgba(255, 255, 255, 0.08);
+            --card-tag-text: #f5f5f7;
+            --gallery-overlay: rgba(0, 0, 0, 0.35);
+            --modal-bg: rgba(0, 0, 0, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', 'Inter', sans-serif;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header .subtitle {
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.8rem;
+            margin-bottom: 0.6rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Навигация */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1rem 0;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            background: var(--nav-blur);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            margin-left: 1rem;
+        }
+
+        .theme-toggle:hover {
+            background: var(--surface-hover);
+            transform: rotate(20deg);
+        }
+
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .burger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text);
+            transition: 0.3s;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: var(--gradient-hero);
+            position: relative;
+            overflow: hidden;
+            margin-top: 0;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><path d="M0 800 L1200 500 L1200 800 Z" fill="%23ff5e3a20"/><circle cx="900" cy="200" r="300" fill="%23ffffff05"/></svg>') no-repeat center/cover;
+            opacity: 0.5;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-content {
+            flex: 1 1 500px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 900;
+            color: #ffffff;
+            line-height: 1;
+            margin-bottom: 1.2rem;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-content .accent-text {
+            background: linear-gradient(to right, #ff5e3a, #ff9a76);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+
+        .hero-visual {
+            flex: 1 1 400px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-card {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 32px;
+            padding: 2.5rem;
+            text-align: center;
+            color: white;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-card .stat {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #ff9a76;
+        }
+
+        @keyframes float {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2.2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(255,94,58,0.35);
+        }
+
+        .btn:hover {
+            background: var(--accent-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 32px rgba(255,94,58,0.5);
+        }
+
+        /* Секции */
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Карточки видов скалолазания */
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .type-card {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+            cursor: default;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .type-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent);
+        }
+
+        .type-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .type-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Галерея */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            aspect-ratio: 4/3;
+            background: var(--surface);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: var(--modal-bg);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            cursor: pointer;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* Аккордеон для техники / советов */
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .accordion-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.3rem 1.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .accordion-header:hover {
+            background: var(--surface-hover);
+        }
+
+        .accordion-body {
+            padding: 0 1.8rem 1.5rem;
+            color: var(--text-secondary);
+            display: none;
+        }
+
+        .accordion-item.active .accordion-body {
+            display: block;
+        }
+
+        .accordion-icon {
+            transition: transform 0.3s;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Снаряжение - карточки */
+        .gear-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+            gap: 1.5rem;
+        }
+
+        .gear-card {
+            background: var(--surface);
+            border-radius: 20px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .gear-card:hover {
+            border-color: var(--accent);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Футер */
+        .footer {
+            background: #0a0a0a;
+            color: #aaa;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+            gap: 2rem;
+        }
+
+        .footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--nav-blur);
+                backdrop-filter: blur(24px);
+                flex-direction: column;
+                padding: 1.5rem;
+                border-bottom: 1px solid var(--border);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .burger {
+                display: flex;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <nav class="nav">
+        <div class="container">
+            <a href="#" class="nav-logo">Rock<span>Flow</span></a>
+            <button class="burger" id="burger" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#history">История</a></li>
+                <li><a href="#types">Виды</a></li>
+                <li><a href="#technique">Техника</a></li>
+                <li><a href="#safety">Безопасность</a></li>
+                <li><a href="#gear">Снаряжение</a></li>
+                <li><a href="#training">Тренировки</a></li>
+                <li><a href="#tips">Советы</a></li>
+                <li><a href="#gallery">Галерея</a></li>
+                <li><button class="theme-toggle" id="themeToggle" aria-label="Сменить тему">☀️</button></li>
+            </ul>
+        </div>
+    </nav>
 
-
-
-
-    <header>
-        <a class="menu" href="#main">Общее описание</a>
-        <a class="menu" href="#about">История развития</a>
-        <a class="menu" href="#contacts">Виды скалолазания</a>
-        <a class="menu" href="#Deep Water Solo">Фри-соло и Deep Water Solo (DWS)</a>
-
+    <header class="hero" id="main">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Достигни <span class="accent-text">вершины</span></h1>
+                <p>Профессиональный портал о скалолазании: от истории до сложнейших техник. Твой путь начинается здесь.</p>
+                <a href="#types" class="btn">Исследовать</a>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="stat">12k+</div>
+                    <div>скалолазов с нами</div>
+                </div>
+            </div>
+        </div>
     </header>
-    <main>
-<div class="block"></div>
 
-
-
-
-    
-        <section id="main">
-           <h1>Скалолазание</h1> 
-           <h2>Общее описание</h2> 
-           <p>   Скалолазание — вид спорта и активного отдыха, заключающийся в лазании по естественному (скалы) или искусственному (скалодром) рельефу. Цель — преодолеть маршрут на скорость, на технику или на выносливость, в зависимости от формата.</p>
-        <p>Заниматься можно на скалах, на стендах в спортзале, на уличных скалодромах. В скалодромах стоят специальные стенки с выступами-зацепками, напоминающими скалы.</p>
-        <img src="https://avatars.mds.yandex.net/i?id=b319bedb7b1871b6ff82b961dd40836c5555d0e3-5495613-images-thumbs&n=13" width="750" alt="">
-    </section>
-        <section id="about">
-            <h2>История развития:</h2>
-            <p>Скалолазание как вид спорта возникло в XIX веке в горных районах. Считается, что оно стало активно развиваться в последней четверти XIX века по крайней мере в трёх географических местностях: Эльбских песчаниковых горах в Саксонии около Дрездена, Озёрном крае в Англии и Доломитах в Италии. </p>
-        <p>Занятие скалолазанием в свободное время получило широкое распространение в Европе: скальные районы Германии (Саксонская Швейцария, Циттауские горы и др.), Австрии (Тирольские Альпы), скалы Шотландии, Ирландии, Швейцарии и других стран. В России более 150 лет назад в окрестностях Красноярска зародилось лазание на Красноярских столбах — столбизм. В США в начале XX века зародилось лазание по скалам в Йосемитском национальном парке.</p>
-        
-            <img src="https://avatars.mds.yandex.net/i?id=d9caad76e5e8bc56cbfde4c5cf5f1a8a89b2a7f0-6917684-images-thumbs&n=13" width="750" alt="">
-        </section>
-
-        <section id="contacts">
-            <h1>Виды скалолазания</h1>
-            <p>В спортивном скалолазании выделяют три основные дисциплины: трудность, скорость и боулдеринг.</p>
-            <a class="contacts" href="#Bouldering">Боулдеринг</a>
-            <a class="contacts" href="#The difficulty">Трудность</a>
-            <a class="contacts" href="#Speed">Cкорость</a>
-
-
-</section>
-<section id="Bouldering">
-            <h2>Боулдеринг </h2>
-        <p>Боулдеринг (англ. bouldering) — вид скалолазания, серия коротких (5–8 перехватов) предельно сложных трасс. Название происходит от английского слова boulder («валун») — «лазание по валунам». </p>
-
-        <h3>Особенности:</h3>
-        <p> - Трассы высотой не более 4,5–5 м.</p>
-        <p> - На прямых и наклонных стенах располагаются зацепы — специальные выступы разных размеров и форм, за которые цепляются.</p>
-        <p> - На трассе бывает бонус — зацеп, за который спортсмен получает дополнительные очки, и топ — зацеп, расположенный наверху, за который нужно взяться обеими руками, и тогда трасса будет считаться пройденной.</p>
-        <p> - Спортсменам не нужна традиционная страховка — безопасность обеспечивает толстый мягкий мат, на который в любой момент можно спрыгнуть. </p>
-
-        <img src="https://avatars.mds.yandex.net/i?id=67df1ceca45578b0092926c72866982a_l-5210240-images-thumbs&n=13" width="750" alt="">
-
-        <h3>Правила</h3>
-<p>Задача спортсмена на соревнованиях: добраться до топа — финишной точки трассы, отмеченной особым маркером. Нужно ухватиться за него двумя руками и удержаться. Есть промежуточные точки, называемые бонусами, которые тоже учитываются в результатах. </p>
-        <p>На трассу даётся 4–5 минут и неограниченное количество попыток. Обычно проводится квалификационный раунд, полуфинал и финал. В каждом раунде спортсмены проходят серию из нескольких трасс. </p>
-<p>Результаты подсчитываются с учётом ряда показателей (в порядке приоритета): число взятых топов, число взятых бонусов, количество попыток, время прохождения трассы.</p>
-<p>Зоны старта и финиша чётко обозначены, выходить за их пределы нельзя, как и пропускать обязательные зацепы. За падения не штрафуют, но отведённое на прохождение время продолжает идти. </p>
-
-<h3>Снаряжение</h3>
-<p>Для занятия боулдерингом не нужна сложная экипировка. Достаточно скальных туфель и мешочка с магнезией. Обвязка, верёвки и карабины не требуются. </p>
-<p>При лазании на скалах ещё потребуются маты — крэшпэды. Обычно они сделаны из поролона в два или три слоя и нужны для защиты от травм при случайных падениях. На скалодромах маты обязательно устилают пол. </p>
-<p>Ещё один аксессуар — небольшая деревянная щёточка для чистки зацепов.</p>
-<p>Изображения необходимого снаряжения для занятия боулдерингом:</p>
-<img src="https://avatars.mds.yandex.net/i?id=856e566e079ba77c40f80bc41a93e6e5_l-7998976-images-thumbs&n=13" width="750" alt="">
-</section>
-<section id="The difficulty">
-<h2>Трудность </h2>
-<p>Лазание на трудность (лазание на сложность) — вид скалолазания, не индивидуальное лазание (всегда есть страхующий). Цель — подняться до топа. </p>
-
-<h3>Условия</h3>
-<p>Соревнования обычно проводятся на искусственных стенах (скалодромах), которые соответствуют строгим стандартам безопасности и сложности. Для крупных соревнований стена должна быть не менее 9 метров в высоту и позволять одновременный старт на трёх трассах.</p>
-<p>Соревнования могут быть индивидуальными или в формате дуэли, где два спортсмена лазают одновременно на параллельных трассах.</p>
-<p>Перед стартом спортсмены знакомятся с маршрутом визуально, в лазании на трудность разрешён только осмотр снизу.</p>
-<p>Для обозначения сложности трасс используют французскую шкалу (5а–9b и выше). Чем выше цифра и буква, тем сложнее маршрут: a — относительно лёгкие, b — средние.</p>
-<img src="https://rusclimbing.ru/upload/resize_cache/webp/iblock/015/ngl3h58ti0nbav14gto9d1axso4ud8gv/IMG_20240402_190406.webp" width="750" alt="">
+    <section id="history">
+        <div class="container">
+            <div class="section-header">
+                <p class="subtitle">Корни спорта</p>
+                <h2>История скалолазания</h2>
+            </div>
+            <div style="max-width:750px;margin:0 auto;text-align:center;color:var(--text-secondary);">
+                <p>Скалолазание выросло из альпинизма в конце XIX века. Сначала это был способ тренировок перед горными восхождениями в Альпах, а затем превратилось в самостоятельную дисциплину. В 1980-х годах появились первые крытые скалодромы, сделавшие спорт доступным миллионам. Сегодня это олимпийский вид, объединяющий силу, гибкость и стратегическое мышление.</p>
+            </div>
+        </div>
     </section>
 
-<section id="Speed">
-<h2>Cкорость</h2>
+    <section id="types">
+        <div class="container">
+            <div class="section-header">
+                <p class="subtitle">Дисциплины</p>
+                <h2>Виды скалолазания</h2>
+            </div>
+            <div class="types-grid">
+                <div class="type-card"><div class="icon">🧗</div><h3>Боулдеринг</h3><p>Короткие сложные трассы без страховки, высота до 4-5 метров. Чистая мощь и техника.</p></div>
+                <div class="type-card"><div class="icon">🪢</div><h3>Трудность</h3><p>Длинные маршруты с верёвкой. Выносливость и умение читать рельеф.</p></div>
+                <div class="type-card"><div class="icon">⏱️</div><h3>Скорость</h3><p>Парные забеги на эталонной 15-метровой стене. Взрывная динамика.</p></div>
+                <div class="type-card"><div class="icon">🏔️</div><h3>Традиционное</h3><p>Лазание на естественном рельефе с установкой своих точек страховки.</p></div>
+            </div>
+        </div>
+    </section>
 
-<h3>Описание</h3>
-<p>Лазание на скорость — вид скалолазания, где участники соревнуются на время, поднимаясь по специально подготовленной трассе. Цель — подняться до конца трассы за минимальное время.</p>
+    <section id="technique">
+        <div class="container">
+            <div class="section-header"><p class="subtitle">Мастерство</p><h2>Техника лазания</h2></div>
+            <div class="accordion">
+                <div class="accordion-item"><div class="accordion-header">Постановка ног <span class="accordion-icon">+</span></div><div class="accordion-body">Ставь носок точно на зацепку, используй бока стопы. Тишина — признак точности.</div></div>
+                <div class="accordion-item"><div class="accordion-header">Работа корпуса <span class="accordion-icon">+</span></div><div class="accordion-body">Держи бёдра близко к стене, скручивайся для экономии сил рук.</div></div>
+                <div class="accordion-item"><div class="accordion-header">Динамика и статика <span class="accordion-icon">+</span></div><div class="accordion-body">Чередуй плавные контролируемые движения с мощными бросками к далёким зацепам.</div></div>
+            </div>
+        </div>
+    </section>
 
-<img src="https://avatars.mds.yandex.net/i?id=b5d29c7c9b2e9ff74c02f02338e5800800fd676e-9846597-images-thumbs&n=13" width="750" alt="">
+    <section id="safety">
+        <div class="container">
+            <div class="section-header"><p class="subtitle">Важно</p><h2>Безопасность</h2></div>
+            <div style="max-width:700px;margin:0 auto;color:var(--text-secondary);text-align:center;">
+                <p>🔸 Всегда проверяй снаряжение и узлы.<br>🔸 Общайся с напарником: «Страховка готова», «Понял».<br>🔸 Приземляйся правильно в боулдеринге — на согнутые ноги с перекатом.</p>
+            </div>
+        </div>
+    </section>
 
-<h3>История</h3>
-<p>История: лазание на скорость зародилось в Советском Союзе в 1947 году как лазание на время («кто быстрее») с верхней страховкой. В 1987 году комиссия по скалолазанию при UIAA утвердила лазание на скорость в качестве отдельной дисциплины. В 2005 году для ускорения включения скалолазания в программу Летних Олимпийских игр была создана эталонная трасса, на которой большинство международных соревнований стали проходить именно на ней. </p>
+    <section id="gear">
+        <div class="container">
+            <div class="section-header"><p class="subtitle">Экипировка</p><h2>Снаряжение</h2></div>
+            <div class="gear-grid">
+                <div class="gear-card">🪨<h3>Скальники</h3><p>Специальная обувь с агрессивным загибом для точного трения.</p></div>
+                <div class="gear-card">🦺<h3>Страховочная система</h3><p>Беседка, соединяющая скалолаза с верёвкой.</p></div>
+                <div class="gear-card">🧤<h3>Магнезия</h3><p>Порошок или жидкая магнезия для сухости рук.</p></div>
+                <div class="gear-card">🔒<h3>Карабины</h3><p>Алюминиевые или стальные соединительные элементы.</p></div>
+            </div>
+        </div>
+    </section>
 
-<h3>Правила</h3>
-<p>Некоторые правила соревнований по лазанию на скорость:</p>
-<p>Формат: квалификация определяет лучших, которые затем соревнуются в 1/8 финала, четвертьфинале, полуфинале и финале. </p>
-<p>Результат: время прохождения трассы (в формате парной гонки — одной или двух трасс). На соревнованиях I и II класса время фиксируется системой электронного хронометража.</p>
-<p>В парных гонках: побеждает первый финишировавший. </p>
-<p>Минимально должно пройти квалификацию 4 участника, иначе этап повторяется. </p>
-<h4>Особенности:</h4>
-<p>Квалификация может включать демонстрацию трасс судьёй в двух режимах лазания — медленном и скоростном.</p>
-<p>Если трассы идентичные, дистанцией парной гонки может считаться одна из трасс.</p>
+    <section id="training">
+        <div class="container">
+            <div class="section-header"><p class="subtitle">Прогресс</p><h2>Тренировки</h2></div>
+            <div style="max-width:650px;margin:0 auto;color:var(--text-secondary);">
+                <p>🔹 Разминка суставов и пальцев обязательна.<br>🔹 Планка и подтягивания — база силы.<br>🔹 Лазай объём и разнообразие трасс, а не только любимый стиль.</p>
+            </div>
+        </div>
+    </section>
 
-<h3>Трассы</h3>
-<p>Соревнования на скорость проводятся на 15-метровой эталонной трассе с углом наклона 5±0,5 градуса. Трасса состоит из эталонных 20 ручных и 11 ножных зацепок. </p>
-<p>Изначально скорость проводилась в классическом формате: уникальные трассы на каждых соревнованиях. Участники парных гонок лезли обе трассы, поочерёдно меняясь местами, их времена суммировались, и в следующий раунд выходил наиболее быстрый спортсмен. С 2005 года соревнования в скорости проходят на стандартизированных эталонных трассах (рекордный формат). </p>
+    <section id="tips">
+        <div class="container">
+            <div class="section-header"><p class="subtitle">Старт</p><h2>Советы новичкам</h2></div>
+            <div class="accordion">
+                <div class="accordion-item"><div class="accordion-header">Не смотри на категории <span class="accordion-icon">+</span></div><div class="accordion-body">Цифры сложности придут со временем. Сначала — удовольствие от движения.</div></div>
+                <div class="accordion-item"><div class="accordion-header">Расслабляй хват <span class="accordion-icon">+</span></div><div class="accordion-body">Сжимай зацепки ровно настолько, чтобы не упасть. Экономия сил.</div></div>
+                <div class="accordion-item"><div class="accordion-header">Смотри видео профессионалов <span class="accordion-icon">+</span></div><div class="accordion-body">IFSC-трансляции — лучшая школа чтения трасс.</div></div>
+            </div>
+        </div>
+    </section>
 
-<img src="https://avatars.mds.yandex.net/i?id=b671dbff81356d13143151cb94d51162c6b4dc05-5194768-images-thumbs&n=13" width="750" alt="">
+    <section id="gallery">
+        <div class="container">
+            <div class="section-header"><p class="subtitle">Моменты</p><h2>Галерея</h2></div>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1564769662533-4f00a87b4056?w=600&q=80" alt="Скалолаз" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&q=80" alt="Боулдеринг" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1606925797300-0b35e9d788cb?w=600&q=80" alt="Снаряжение" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=600&q=80" alt="Скорость" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
 
-<h3>Тренировка</h3>
-<b>Некоторые крупные соревнования по скоростному скалолазанию:</b>
-<p>Чемпионат мира IFSC по скалолазанию — например, в 2023 году в Берне (Швейцария).</p>
-<p>Летние Олимпийские игры 2024 года — скалолазание на скорость стало самостоятельным соревнованием, отдельным от соревнований по свинцу и боулдерингу в сочетании.</p>
+    <div class="lightbox" id="lightbox"><img src="" alt=""></div>
 
-<h3>Мировые рекорды:</h3>
-<p>У мужчин — 4,64 секунды (поставлен 3 мая 2025 года на кубке мира IFSC на Бали, принадлежит Самуэлю Уотсону (США)).</p>
-<p>У женщин — 6,034 секунды (поставлен 24 сентября 2025 года в финальном забеге кубка мира IFSC в Корее, принадлежит Александре Мирослав (Польша)).</p>
-</section>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div><h4>RockFlow</h4><p>Гид в мир скалолазания.</p></div>
+                <div><h4>Контакты</h4><p>info@rockflow.ru<br>+7 999 123-45-67</p></div>
+                <div><h4>Соцсети</h4><a href="#">Telegram</a><br><a href="#">YouTube</a></div>
+            </div>
+            <p style="text-align:center;margin-top:2rem;font-size:0.85rem;">© 2026 RockFlow. Все права защищены.</p>
+        </div>
+    </footer>
 
-<section id="Deep Water Solo">
+    <script>
+        (function() {
+            // Тема
+            const toggle = document.getElementById('themeToggle');
+            const html = document.documentElement;
+            const currentTheme = localStorage.getItem('theme') || 'dark';
+            html.setAttribute('data-theme', currentTheme);
+            toggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
 
-<h1>Фри-соло и Deep Water Solo (DWS)</h1>
+            toggle.addEventListener('click', () => {
+                const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                toggle.textContent = next === 'dark' ? '☀️' : '🌙';
+            });
 
-<h2>Фри-соло</h2>
-<p>Фри-соло (англ. Free Solo climbing) — разновидность скалолазания, в которой спортсмен проходит маршрут в одиночку свободным лазаньем, без использования искусственных точек опоры, страховочных верёвок и другого защитного или вспомогательного снаряжения. </p>
-<p>Фри-соло может применяться не только к скальным маршрутам, но и к другим видам скалолазания, например, ледолазанию и смешанному скалолазанию. </p>
+            // Бургер
+            document.getElementById('burger').addEventListener('click', () => {
+                document.getElementById('navLinks').classList.toggle('active');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active'));
+            });
 
-<img src="https://s.yimg.com/ny/api/res/1.2/tW5TMQBrcmNnSxMGFKn9pQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://media.zenfs.com/en/people_218/a6342d135f0995a80e12ddebdbaa4ebf" width="750" alt="">
+            // Аккордеон
+            document.querySelectorAll('.accordion-header').forEach(header => {
+                header.addEventListener('click', () => {
+                    header.parentElement.classList.toggle('active');
+                });
+            });
 
-<h3>Правила</h3>
-<p>Предварительное изучение маршрута. Фри-солисты проходят его несколько раз в одиночку со страховкой, с напарником или с командой поддержки. Зачастую к серьёзным маршрутам готовятся на других, менее сложных скалах со схожими участками рельефа. </p>
-<p>Использование лишь скальных туфель, магнезии и щёточки для очистки зацепок и полочек от излишков порошка.</p>
-<p>Отсутствие напарника — не требуется страховочная верёвка. </p>
+            // Лайтбокс галереи
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = lightbox.querySelector('img');
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                img.addEventListener('click', (e) => {
+                    lightboxImg.src = e.target.src;
+                    lightbox.classList.add('active');
+                });
+            });
+            lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
 
-<h3>Техника</h3>
-<p>Использование только собственных сил — скалолаз поднимается по стене, используя только руки и ноги.</p>
-<p>Отработка хватов — последовательность хватов анализируется, многократно повторяется, и для полного запоминания зачастую фиксируется спортсменом на бумаге.</p>
-<p>Спуск — в зависимости от маршрута и местоположения скалолаз может спуститься по тому же маршруту, по менее крутому пути или использовать комбинацию спуска и похода, carrying небольшую верёвку. В некоторых случаях скалолаз может выбрать базовый прыжок или парашют с вершины, но это менее распространено и требует конкретных условий и подготовки.</p>
-
-<h3>Опасности</h3>
-<p>Риск срыва — в отличие от боулдеринга, фри-солисты поднимаются гораздо выше безопасной высоты, так что срыв скорее всего может стать фатальным. </p>
-<p>Отсутствие права на ошибку — у спортсмена нет второго шанса, и любая неосторожность или обломавшийся зацеп означают тотальный срыв. </p>
-<p>Затруднённое отступление — наиболее опасные формы фри-соло — многопроходные маршруты и длинные маршруты big wall, где любое отступление затруднено.</p>
-
-<b style="color: red; font-size:25px ;">Фри-соло считается самой опасной формой скалолазания и не рекомендуется!</b>
-
-<h3>Известные представители</h3>
-<p>Алекс Хоннольд — американский скалолаз, известный в стиле фри-соло. Всемирную известность приобрёл в 2017 году, когда взобрался на 910-метровую отвесную скалу Эль-Капитан в Калифорнии (маршрут Freerider). Хоннольд преодолел почти 1000 метров вертикального скального полотна за 3 часа 56 минут, не имея при себе ничего, кроме мешочка с магнезией.</p>
-<p>Алекс Хубер — немецкий скалолаз, известный сложным фри-соло и лазанием по большим стенам. Например, в 2004 году Хубер прошёл маршрут Kommunist категории 8b+.</p>
-<p>Ален Робер — скалолаз, известный городским фри-соло — восхождением на высокие небоскрёбы и структуры без использования верёвок или защитного снаряжения. Например, в 2009 году Робер успешно взобрался на башни Петронас в Куала-Лумпуре. </p>
-
-<img src="https://avatars.mds.yandex.net/i?id=e0dbd4e59869ca140ae092a0742c8f1195b0c158-7942200-images-thumbs&n=13" width="750" alt="">
-
-
-<h2>Deep Water Solo (DWS)</h2>
-<p>Deep Water Solo (DWS) — это свободное лазание над водой без страховки, при котором любое падение должно привести скалолаза к глубокой воде ниже маршрута. Также известен как psicobloc (от «psycho-bouldering»).</p>
-<p>Маршруты DWS обычно располагаются на берегу моря, где есть нависающая скала без опасных камней в воде. Но можно лазать и над водохранилищами, озёрами, реками и другими глубокими водоёмами. </p>
-<p>Маршруты DWS могут варьироваться от менее чем 5 метров до более чем 40 метров в высоту в крайнем конце. </p>
-
-<img src="https://i.pinimg.com/originals/72/d4/0f/72d40fec9b32e8e3f89fb052eeddb55e.jpg" width="750" alt="">
-
-<h3>История</h3>
-<p>DWS возник в конце 1970-х годов на Майорке (Испания). Местный скалолаз Микель Риера открыл в 1978 году остров Кова-дель-Димони и понял, что океан действует как естественная страховка. </p>
-<p>Популяризировали и развили DWS британские альпинисты Тим Эмметт, Майк Робертсон и Нил Грешем, а также австрийский альпинист Клем Лоскот.</p>
-<p>DWS привлек внимание мира благодаря восхождению Криса Шармы в 2006 году на морскую арку Майорка-Эс-Понтас, которая при классе восхождения 5.15a (9a+) сделала её одним из самых сложных маршрутов для скалолазания в мире на тот момент.</p>
-
-<h3>Техника</h3>
-<p>Контролированный спуск со стены, поддержание свободной позы, которая позволяет «корректировать» падение в более вертикальное положение.</p>
-<p>Безопасный вход в воду. Обычно скалолаз входит в воду ногами первым, ноги расположены вместе, руки плотно прижаты к бокам тела. Перед входом не стоит смотреть вниз — это может привести к наклону вперёд и увеличению риска травмы головы.</p>
-<p>Техника «кресло» — используется для более мелкой воды, чтобы ограничить глубокий вход. Скалолаз тянет ноги вверх к груди и наклоняется назад, как будто сидит в кресле, руки вытянуты в стороны. Этот метод уменьшает удар, позволяя контактировать с зоной приземления больше телом.</p>
-<p>  </p>
-<p>Снаряжение: скальные туфли, мешочек с магнезией. На некоторых маршрутах устанавливают деревянные скамейки и небольшие верёвочные лестницы, чтобы скалолаз мог доступ к маршруту и отдыхать между попытками. </p>
-
-<img src="https://i.dailymail.co.uk/i/pix/2014/08/05/article-2716480-2043817600000578-781_964x634.jpg" width="750" alt="">
-
-<h3>Безопасность</h3>
-<p>При занятии DWS важно соблюдать меры безопасности, так как дисциплина может быть опасной. Некоторые рекомендации: </p>
-<p>Проверять глубину зоны входа перед лазанием — уровень воды может меняться из-за изменений в приливах, уровней озёр и бурного моря. </p>
-<p>Выявлять подводные опасности — камни, рифы, плавучие предметы.</p>
-<p>Определять места выхода из воды — можно разместить фиксированные верёвки для экстренного и рутинного выхода, а также поставить наблюдателей с мешками для спасения. </p>
-<p>Не идти в одиночку — хотя DWS и называется «соло», не рекомендуется заниматься этим без партнёра. </p>
-<p>Учитывать температуру воды — если вода холодная (например, ниже 15°C), перед лазанием рекомендуется провести плавание, чтобы акклиматизироваться к температуре. </p>
-
-<h3>Соревнования</h3>
-<p>DWS стал популярной дисциплиной, особенно в форматах «дуэлей» один на один. Например, одно из заметных соревнований — Psicobloc Masters Series (2011, 2012–2018), которая позже превратилась в Psicobloc Open Series.</p>
-<b>Важно: DWS требует хотя бы минимального опыта прыжков в воду и отличного уровня плавания.</b>
-
-
-</section>
-
-
-
-
-
-    </main>
-    <footer></footer>
+            // Плавное появление секций
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('section').forEach(sec => {
+                sec.style.opacity = 0;
+                sec.style.transform = 'translateY(20px)';
+                sec.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(sec);
+            });
+        })();
+    </script>
 </body>
 </html>
